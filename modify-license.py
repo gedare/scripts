@@ -146,7 +146,7 @@ def main():
 
     print targets
     if modify:
-        for f in files:
+        for f in targets:
             modify_license(f)
 
 
