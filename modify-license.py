@@ -18,10 +18,9 @@ import sys
 
 def usage():
     print "\
-Usage: modify-license.py -[hf]\n\
+Usage: modify-license.py -[hm]\n\
   -h --help         print this help\n\
-  -f --file         file name to update\n\
-  -a --authors      list of authors\n\
+  -m --modify       modify license of identified files\n\
 "
 
 # Utilities
@@ -120,13 +119,13 @@ def validate_arguments(filename):
 
 def main():
     # default args
-    filename = ""
+    modify = False
     authors = ["Gedare Bloom gedare@rtems.org"]
     copyright_holders = ["Gedare Bloom", "Eugen Leontie"]
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hf:",
-                ["help", "file="])
+        opts, args = getopt.getopt(sys.argv[1:], "hm",
+                ["help", "modify"])
     except getopt.GetoptError, err:
         print str(err)
         usage()
@@ -135,8 +134,8 @@ def main():
         if opt in ("-h", "--help"):
             usage()
             sys.exit()
-        if opt in ("-f", "--file"):
-            filename = arg
+        elif opt in ("-m", "--modify"):
+            modify = True
         else:
             assert False, "unhandled option " + opt
 
@@ -146,8 +145,9 @@ def main():
             root, files, authors, copyright_holders))
 
     print targets
-#    for f in files:
-#        modify_license(f)
+    if modify:
+        for f in files:
+            modify_license(f)
 
 
 
