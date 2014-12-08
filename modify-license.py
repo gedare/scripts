@@ -93,7 +93,7 @@ def find_files_with_authors_and_copyrights(root, files, authors, copyright_holde
 
 # the main event
 def modify_license(filename):
-    new_license_line = "This file's license is 2-clause BSD as in this distribution's LICENSE.2 file."
+    new_license_line = "This file's license is 2-clause BSD as in this distribution's LICENSE.2 file.\n"
 
     # Read the file into an array, replace first line of existing boilerplate
     # with a new boilerplate, remove other lines that reference the license,
