@@ -74,12 +74,14 @@ def find_files_with_authors_and_copyrights(root, files, authors, copyright_holde
 
         for line in string.split(str(out), "\n"):
             if line and not line in authors:
+                print "Did not find author: " + line
                 break
         else:
             # Now check that all copyright holders are in copyright_holders
             file_copyright_holders = get_copyright_holders_from_file(f)
             for copyright_tuple in file_copyright_holders:
                 if copyright_tuple and not copyright_tuple[1] in copyright_holders:
+                    print "Did not find copyright holder: " + copyright_tuple[1]
                     break
             else:
                 # Success
@@ -120,8 +122,13 @@ def validate_arguments(filename):
 def main():
     # default args
     modify = False
-    authors = ["Gedare Bloom gedare@rtems.org"]
-    copyright_holders = ["Gedare Bloom", "Eugen Leontie"]
+    authors = [
+            "Gedare Bloom gedare@rtems.org",
+            ]
+    copyright_holders = [
+            "Gedare Bloom",
+            "Eugen Leontie",
+            ]
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "hm",
